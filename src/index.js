@@ -13,7 +13,6 @@ root.render(
     <BrowserRouter>
       <Navbar />
       <Routes>
-        {/* <Route name="home" path='/' element={<Home/>}></Route> */}
         <Route name="search" path='/search' element={<Recherche/>}></Route>
       </Routes>
   </BrowserRouter>
