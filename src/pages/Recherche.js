@@ -19,13 +19,16 @@ export default function Navbar(){
 
     return (
         <div className='flex justify-evenly  w-1/1'>   
-        <table>
-            <thead></thead>
+        <table >
+            <thead>
+                <td></td>
+                <td>Titre</td>
+            </thead>
             <tbody>
                 
-                {data && data.results.map((repas) =>{
+                {data && data.results && data.results.map((repas) =>{
                     return(
-                        <tr key={repas.id}>
+                        <tr  key={repas.id}>
                             <td className='w-24'><img src={repas.image}></img></td>
                             <td>{repas.title}</td>
                         </tr>
