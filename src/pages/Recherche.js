@@ -24,19 +24,28 @@ export default function Navbar(){
 
     // useEffect(() => {
     //     const fetchData = async () => {
-    //     const response = await fetch('https://api.spoonacular.com/recipes/complexSearch?apiKey=160c6021f73643b18ba7e0ad4b916643');
+    //     const response = await fetch('https://api.spoonacular.com/recipes/complexSearch?apiKey=160c6021f73643b18ba7e0ad4b916643&query=' + inputText);
     //     const json = await response.json();
     //     setData(json);
-    //     };
-    //     fetchData();
-    // }, []);
+    //     }; 
+    //     fetchData(); 
+    // }, [inputText]);
     
     return (
         <div className='flex  flex-col items-center w-1/1'>  
+        <div className='flex flex-row w-full items-center justify-center'>
+            {/* textboxrecherche */}
             <div className='w-1/4'>
                 <input className='w-full border-2 border-gray-300 rounded-lg p-2' onChange={handleChange} placeholder='Recherche'></input>
                 <p>{inputText != '' ? (<>{inputText}</>) : (<></>)}</p>
             </div>
+            <div className='w-1/4'>
+                <select placeholder='Catégorie' className=' border-2 border-gray-300 rounded-lg p-2'>
+                    <option value=''>-- Selectionnez une opion --</option>
+                </select>
+            </div>
+        </div>
+            
             
             {/* {data && data.results ? ( */}
             <table >
