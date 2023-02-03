@@ -1,16 +1,23 @@
 import React, { useEffect, useState } from 'react';
+
 import getIngredients from '../utils/getIngredients';
 import IngredientPicker from '../components/Ingredients/IngredientPicker';
+
+import { useNavigate } from 'react-router-dom';
+
 
 export default function Navbar(){
 
     var timeout = 0;
+
 
     const [data, setData] = useState([]);
 
     const [listIngredients, setListIngredients] = useState(null);
 
     const [ingredients, setIngredients] = useState([]);
+    const navigate = useNavigate();
+
 
     const [filter, setFilter] = useState('complexSearch');
 
@@ -27,8 +34,14 @@ export default function Navbar(){
             setInputText(e.target.value);
            
         }, 500);
-        
     }
+    const handleClick = (e,id) => {
+        navigate("/recipe/"+id)
+    }
+
+
+        
+
 
     const handleChangeminCarbs = (e) => {
         e.preventDefault();
@@ -40,26 +53,29 @@ export default function Navbar(){
                 setMinCarbs('1')
             }
            
-        }, 1500);
+        }, 700);
     }
 
     const handleChangemaxCarbs = (e) => {
         e.preventDefault();
+        
         clearTimeout(timeout)
         timeout = setTimeout(() => {
             if(e.target.value >= Number(minCarbs)){
-                
                 setMaxCarbs(e.target.value);
 
             } else {
                 setMaxCarbs('')
             }
            
-        }, 1500);
+        }, 700);
     }
 
     // 7924ce9a31634a24b50f584ec8ea8b86
+
+    // c9ac5e1b5ca9448fb5cf775c71b4aeb1
     // 9185b4dc4ec64b1bbd9055313ecf227c
+
     useEffect(() => {
         const fetchData = async () => {
             var response = null
@@ -135,13 +151,13 @@ export default function Navbar(){
                 </thead>
                 <tbody>
                     <tr>
-                        <td><img className='w-24' src='https://images.ctfassets.net/hrltx12pl8hq/3j5RylRv1ZdswxcBaMi0y7/b84fa97296bd2350db6ea194c0dce7db/Music_Icon.jpg'></img></td>
+                        <td><img className='w-24' src='https://images.ctfassets.net/hrltx12pl8hq/3j5RylRv1ZdswxcBaMi0y7/b84fa97296bd2350db6ea194c0dce7db/Music_Icon.jpg' /></td>
                         <td>Repas</td>
                     </tr>
                     {data && data.results && data.results.map((repas) =>{
                         return(
-                            <tr  key={repas.id}>
-                                <td className='w-24'><img src={repas.image}></img></td>
+                            <tr onClick={(e) =>  handleClick(e,repas.id)}  key={repas.id}>
+                                <td className='w-24'><img src={repas.image}/></td>
                                 <td>{repas.title}</td>
                             </tr>
                         )
