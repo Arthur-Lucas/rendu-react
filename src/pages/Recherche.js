@@ -22,14 +22,14 @@ export default function Navbar(){
         
     }
 
-    useEffect(() => {
-        const fetchData = async () => {
-        const response = await fetch('https://api.spoonacular.com/recipes/complexSearch?apiKey=160c6021f73643b18ba7e0ad4b916643&query=' + inputText);
-        const json = await response.json();
-        setData(json);
-        }; 
-        fetchData(); 
-    }, [inputText]);
+    // useEffect(() => {
+    //     const fetchData = async () => {
+    //     const response = await fetch('https://api.spoonacular.com/recipes/complexSearch?apiKey=160c6021f73643b18ba7e0ad4b916643&query=' + inputText);
+    //     const json = await response.json();
+    //     setData(json);
+    //     }; 
+    //     fetchData(); 
+    // }, [inputText]);
     
     return (
         <div className='flex  flex-col items-center w-1/1'>  
