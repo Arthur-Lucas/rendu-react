@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter, Routes, Route, Link} from "react-router-dom";
 
 
 export default function Navbar(){
@@ -10,7 +9,7 @@ export default function Navbar(){
 
     useEffect(() => {
         const fetchData = async () => {
-        const response = await fetch('https://api.spoonacular.com/recipes/complexSearch?apiKey=160c6021f73643b18ba7e0ad4b916643');
+        const response = await fetch('https://api.spoonacular.com/recipes/complexSearch?apiKey=539381c9df374031919666304f095371');
         const json = await response.json();
         setData(json);
         };
