@@ -28,7 +28,7 @@ export default function Navbar(){
         e.preventDefault();
         clearTimeout(timeout)
         timeout = setTimeout(() => {
-            if(maxCarbs == '' || e.target.value <= maxCarbs){
+            if(maxCarbs == '' || e.target.value <= Number(maxCarbs)){
                 setMinCarbs(e.target.value);
             } else {
                 setMinCarbs('1')
@@ -42,7 +42,7 @@ export default function Navbar(){
         clearTimeout(timeout)
         console.log(minCarbs)
         timeout = setTimeout(() => {
-            if(e.target.value >= minCarbs){
+            if(e.target.value >= Number(minCarbs)){
                 
         console.log(minCarbs + '2')
                 setMaxCarbs(e.target.value);
