@@ -29,7 +29,7 @@ export default function Navbar(){
         navigate("/recipe/"+id)
     }
 
-    useEffect(() => {
+
         
 
 
