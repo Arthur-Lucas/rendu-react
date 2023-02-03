@@ -7,6 +7,7 @@ export default function Navbar(){
     return (
         <div className='flex justify-evenly font-bold w-1/1'>
             <Link  to={{ pathname: `/search`}}>Recherche</Link>
+            <Link to={{pathname: `/signup`}}>Sign Up</Link>
         </div>
     )
 }
