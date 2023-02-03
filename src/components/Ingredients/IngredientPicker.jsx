@@ -7,7 +7,7 @@ export default function IngredientPicker({ setIngredients, ingredients, data }) 
     const [select, setSelect] = useState('')
 
     const addIngredient = (e) => {
-        const foundIngredient = data.find(ingredient => ingredient.name === e.target.value)
+        const foundIngredient = data && data.find(ingredient => ingredient.name === e.target.value)
         if (foundIngredient) {
             if (!ingredients.includes(foundIngredient)){
                 setSelect('')
@@ -28,7 +28,7 @@ export default function IngredientPicker({ setIngredients, ingredients, data }) 
         <input onChange={addIngredient}  className='border border-black' list="ingredients" name='ingredient' value={select} />
         <datalist id='ingredients'>
             <option value="Search for an ingredient (ex: apple)"></option>
-            {data.map(ingredient => {
+            {data && data.map(ingredient => {
                 return <option key={ingredient.id} value={ingredient.name} />
             })}
         </datalist>

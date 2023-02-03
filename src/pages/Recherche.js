@@ -1,13 +1,23 @@
 import React, { useEffect, useState } from 'react';
+
+import getIngredients from '../utils/getIngredients';
+import IngredientPicker from '../components/Ingredients/IngredientPicker';
+
 import { useNavigate } from 'react-router-dom';
+
 
 export default function Navbar(){
 
     var timeout = 0;
 
+
+    const [data, setData] = useState([]);
+
+    const [listIngredients, setListIngredients] = useState(null);
+
+    const [ingredients, setIngredients] = useState([]);
     const navigate = useNavigate();
 
-    const [data, setData] = useState(null);
 
     const [filter, setFilter] = useState('complexSearch');
 
@@ -37,7 +47,6 @@ export default function Navbar(){
         e.preventDefault();
         clearTimeout(timeout)
         timeout = setTimeout(() => {
-
             if(maxCarbs == '' || e.target.value <= Number(maxCarbs)){
                 setMinCarbs(e.target.value);
             } else {
@@ -62,6 +71,8 @@ export default function Navbar(){
         }, 700);
     }
 
+    // 7924ce9a31634a24b50f584ec8ea8b86
+
     // c9ac5e1b5ca9448fb5cf775c71b4aeb1
     // 9185b4dc4ec64b1bbd9055313ecf227c
 
@@ -69,20 +80,29 @@ export default function Navbar(){
         const fetchData = async () => {
             var response = null
         if(filter === 'complexSearch'){
-            console.log(filter)
-            response = await fetch('https://api.spoonacular.com/recipes/' + filter + '?apiKey=c9ac5e1b5ca9448fb5cf775c71b4aeb1&query=' + inputText);
+            response = await fetch('https://api.spoonacular.com/recipes/' + filter + '?apiKey=7924ce9a31634a24b50f584ec8ea8b86&query=' + inputText);
         }
         else if(filter === 'findByNutrients'){
-            response = await fetch('https://api.spoonacular.com/recipes/' + filter + '?apiKey=c9ac5e1b5ca9448fb5cf775c71b4aeb1&minCarbs=' + minCarbs + (maxCarbs != '' ? '&maxCarbs=' + maxCarbs : ''));
+            response = await fetch('https://api.spoonacular.com/recipes/' + filter + '?apiKey=7924ce9a31634a24b50f584ec8ea8b86&minCarbs=' + minCarbs + (maxCarbs != '' ? '&maxCarbs=' + maxCarbs : ''));
         }
         else if(filter === 'findByIngredients'){
-            response = await fetch('https://api.spoonacular.com/recipes/' + filter + '?apiKey=c9ac5e1b5ca9448fb5cf775c71b4aeb1&ingredients=apples');
+            if(ingredients.length > 0){
+                 response = await fetch('https://api.spoonacular.com/recipes/' + filter + '?apiKey=7924ce9a31634a24b50f584ec8ea8b86&ingredients=' + ingredients.map((ingredient) => {
+                    return (
+                        '+' + ingredient.name
+                    )
+                 }));
+            }
+            
+            getIngredients().then(output => {
+                setListIngredients(output)
+            })
         }
         const json = await response.json();
         setData(json);
         }; 
         fetchData(); 
-    }, [inputText, filter, minCarbs, maxCarbs]);
+    }, [inputText, filter, minCarbs, maxCarbs, ingredients]);
     
     return (
         <div className='flex  flex-col items-center w-1/1'>  
@@ -104,8 +124,8 @@ export default function Navbar(){
                 : 
                 (
                     <div className='w-1/4'>
-                    <input className='w-full border-2 border-gray-300 rounded-lg p-2' onChange={handleChange} placeholder='Recherche'></input>
-                </div>
+                        <IngredientPicker setIngredients={setIngredients} ingredients={ingredients} data={listIngredients} />
+                    </div>
                 )}
             </>)
             }
@@ -120,7 +140,7 @@ export default function Navbar(){
         </div>
             
             
-            {/* {data && data.results ? ( */}
+            {data ? (
             <table >
                 <thead>
                     <tr>
@@ -152,7 +172,9 @@ export default function Navbar(){
                     })}
                 </tbody>
             </table>
-            {/*  ) : (<></>)} */}
+            ) : (<p>
+                Aucun résultat à la recherche
+            </p>)}
         </div>
     )
 }
