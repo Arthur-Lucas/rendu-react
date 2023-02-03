@@ -65,31 +65,28 @@ export default function SignUp() {
   return (
     <>
       {modalState.signUpModal && (
-        <div className="position-fixed top-0 vw-100 vh-100">
+        <div>
           <div
-          onClick={closeModal}
-          className="w-100 h-100 bg-dark bg-opacity-75">
+          onClick={closeModal}>
           </div>
             <div
-              className="position-absolute top-50 start-50 translate-middle"
               style={{ minWidth: "400px" }}
             >
-              <div className="modal-dialog">
-                <div className="modal-content">
-                  <div className="modal-header">
-                    <h5 className="modal-title">Sign Up</h5>
+              <div >
+                <div >
+                  <div >
+                    <h5>Sign Up</h5>
                     <button 
                     onClick={closeModal}
-                    className="btn-close"></button>
+                    >X</button>
                   </div>
 
-                  <div className="modal-body">
+                  <div >
                     <form 
                     ref={formRef}
-                    onSubmit={handleForm}
-                    className="sign-up-form">
-                      <div className="mb-3">
-                        <label htmlFor="signUpEmail" className="form-label">
+                    onSubmit={handleForm}>
+                      <div>
+                        <label htmlFor="signUpEmail">
                           Email adress
                         </label>
                         <input
@@ -97,13 +94,12 @@ export default function SignUp() {
                           name="email"
                           required
                           type="email"
-                          className="form-control"
                           id="signUpEmail"
                         />
                       </div>
 
-                      <div className="mb-3">
-                        <label htmlFor="signUpPwd" className="form-label">
+                      <div>
+                        <label htmlFor="signUpPwd" >
                           Password
                         </label>
                         <input
@@ -111,13 +107,12 @@ export default function SignUp() {
                           name="pwd"
                           required
                           type="password"
-                          className="form-control"
                           id="signUpPwd"
                         />
                       </div>
 
                       <div className="mb-3">
-                        <label htmlFor="repeatPwd" className="form-label">
+                        <label htmlFor="repeatPwd">
                           Repeat Password
                         </label>
                         <input
@@ -125,13 +120,12 @@ export default function SignUp() {
                           name="pwd"
                           required
                           type="password"
-                          className="form-control"
                           id="repeatPwd"
                         />
-                        <p className="text-danger mt-1">{validation}</p>
+                        <p>{validation}</p>
                       </div>
 
-                      <button className="btn btn-primary">Submit</button>
+                      <button>Submit</button>
                     </form>
                   </div>
                 </div>
