@@ -40,7 +40,6 @@ export default function SignUp() {
       )
       // formRef.current.reset();
       setValidation("")
-      // console.log(cred);
       toggleModals("close")
       navigate("/private/private-home")
 
@@ -62,8 +61,6 @@ export default function SignUp() {
     setValidation("")
     toggleModals("close")
   }
-
-  console.log(modalState)
 
   return (
     <>

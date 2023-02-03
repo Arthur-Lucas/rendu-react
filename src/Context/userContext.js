@@ -18,7 +18,6 @@ export function UserContextProvider(props) {
 
   const [currentUser, setCurrentUser] = useState();
   const [loadingData, setLoadingData] = useState(true);
-  console.log("MAJ", currentUser);
 
   useEffect(() => {
 
@@ -32,13 +31,23 @@ export function UserContextProvider(props) {
   }, [])
 
 
+  //Déconnexion
+  const signOutUser = (e) => {
+      e.preventDefault();
+      auth.signOut().then(function() {
+        setCurrentUser(null)
+        // Sign-out successful.
+      }).catch(function(error) {
+        // An error happened.
+      });
+  } 
+
+
   // modal
   const [modalState, setModalState] = useState({
     signUpModal: false,
     signInModal: false
   })
-
-  // console.log(modalState)
 
   const toggleModals = modal => {
     if(modal === "signIn") {
@@ -62,7 +71,7 @@ export function UserContextProvider(props) {
   }
 
   return (
-    <UserContext.Provider value={{modalState, toggleModals, signUp, currentUser, signIn}}>
+    <UserContext.Provider value={{modalState, toggleModals, signUp, currentUser, signOutUser, signIn}}>
       {!loadingData && props.children}
     </UserContext.Provider>
   )

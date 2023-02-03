@@ -1,6 +1,7 @@
 import React, { useContext, useRef, useState } from "react";
 import { UserContext } from "../Context/userContext.js";
 import { useNavigate } from "react-router-dom";
+import '../index.css'
 
 export default function SignIn() {
   const { modalState, toggleModals, signIn } = useContext(UserContext);
@@ -19,20 +20,17 @@ export default function SignIn() {
 
   const handleForm = async (e) => {
     e.preventDefault();
-    console.log(inputs);
     try {
       const cred = await signIn(
         inputs.current[0].value,
         inputs.current[1].value
       );
-      // à tester
-      // formRef.current.reset();
+      
       setValidation("");
-      // console.log(cred);
       toggleModals("close");
       navigate("/private/private-home");
     } catch {
-      setValidation("Wopsy, email and/or password incorrect")
+      setValidation("Email and/or password are incorrect")
     }
   };
 
