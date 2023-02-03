@@ -12,8 +12,6 @@ export default function Navbar(){
 
     const [ingredients, setIngredients] = useState([]);
 
-    const [ingredientsPicked, setIngredientsPicked] = useState([]);
-
     const [filter, setFilter] = useState('complexSearch');
 
     const [minCarbs, setMinCarbs] = useState('1');
@@ -72,8 +70,12 @@ export default function Navbar(){
             response = await fetch('https://api.spoonacular.com/recipes/' + filter + '?apiKey=7924ce9a31634a24b50f584ec8ea8b86&minCarbs=' + minCarbs + (maxCarbs != '' ? '&maxCarbs=' + maxCarbs : ''));
         }
         else if(filter === 'findByIngredients'){
-            if(ingredientsPicked != []){
-                 response = await fetch('https://api.spoonacular.com/recipes/' + filter + '?apiKey=7924ce9a31634a24b50f584ec8ea8b86&ingredients=apples');
+            if(ingredients.length > 0){
+                 response = await fetch('https://api.spoonacular.com/recipes/' + filter + '?apiKey=7924ce9a31634a24b50f584ec8ea8b86&ingredients=' + ingredients.map((ingredient) => {
+                    return (
+                        '+' + ingredient.name
+                    )
+                 }));
             }
             
             getIngredients().then(output => {
@@ -84,7 +86,7 @@ export default function Navbar(){
         setData(json);
         }; 
         fetchData(); 
-    }, [inputText, filter, minCarbs, maxCarbs]);
+    }, [inputText, filter, minCarbs, maxCarbs, ingredients]);
     
     return (
         <div className='flex  flex-col items-center w-1/1'>  
@@ -122,7 +124,7 @@ export default function Navbar(){
         </div>
             
             
-            {data && data.results ? (
+            {data ? (
             <table >
                 <thead>
                     <tr>
