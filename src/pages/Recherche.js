@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export default function Navbar(){
 
     var timeout = 0;
+
+    const navigate = useNavigate();
 
     const [data, setData] = useState(null);
 
@@ -21,8 +24,14 @@ export default function Navbar(){
             setInputText(e.target.value);
            
         }, 500);
-        
     }
+    const handleClick = (e,id) => {
+        navigate("/recipe/"+id)
+    }
+
+    useEffect(() => {
+        
+
 
     const handleChangeminCarbs = (e) => {
         e.preventDefault();
@@ -120,13 +129,13 @@ export default function Navbar(){
                 </thead>
                 <tbody>
                     <tr>
-                        <td><img className='w-24' src='https://images.ctfassets.net/hrltx12pl8hq/3j5RylRv1ZdswxcBaMi0y7/b84fa97296bd2350db6ea194c0dce7db/Music_Icon.jpg'></img></td>
+                        <td><img className='w-24' src='https://images.ctfassets.net/hrltx12pl8hq/3j5RylRv1ZdswxcBaMi0y7/b84fa97296bd2350db6ea194c0dce7db/Music_Icon.jpg' /></td>
                         <td>Repas</td>
                     </tr>
                     {data && data.results && data.results.map((repas) =>{
                         return(
-                            <tr  key={repas.id}>
-                                <td className='w-24'><img src={repas.image}></img></td>
+                            <tr onClick={(e) =>  handleClick(e,repas.id)}  key={repas.id}>
+                                <td className='w-24'><img src={repas.image}/></td>
                                 <td>{repas.title}</td>
                             </tr>
                         )
