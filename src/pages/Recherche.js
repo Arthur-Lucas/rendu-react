@@ -164,7 +164,7 @@ export default function Navbar(){
                     })}
                     {data && !data.results && data.map((repas) =>{
                         return(
-                            <tr  key={repas.id}>
+                            <tr onClick={(e) =>  handleClick(e,repas.id)}  key={repas.id}>
                                 <td className='w-24'><img src={repas.image}></img></td>
                                 <td>{repas.title}</td>
                             </tr>
