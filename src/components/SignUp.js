@@ -1,6 +1,7 @@
 import React, { useContext, useRef, useState } from "react";
 import { UserContext } from "../Context/userContext.js";
 import {useNavigate} from "react-router-dom"
+import '../index.css';
 
 export default function SignUp() {
   
@@ -61,6 +62,8 @@ export default function SignUp() {
     setValidation("")
     toggleModals("close")
   }
+
+  console.log(modalState)
 
   return (
     <>

@@ -38,6 +38,8 @@ export function UserContextProvider(props) {
     signInModal: false
   })
 
+  // console.log(modalState)
+
   const toggleModals = modal => {
     if(modal === "signIn") {
       setModalState({

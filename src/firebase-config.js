@@ -15,3 +15,9 @@ export const auth = getAuth(app);
 onAuthStateChanged(auth, user => {
     // Check for user status
   });
+
+  // firebase.auth().signOut().then(function() {
+  //   // Sign-out successful.
+  // }).catch(function(error) {
+  //   // An error happened.
+  // });

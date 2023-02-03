@@ -13,6 +13,9 @@ root.render(
   <>
     <BrowserRouter>
     <UserContextProvider>
+      
+      <SignUp />
+      <SignIn />
       <Navbar />
       <Routes>
         <Route name="search" path='/search' element={<Recherche/>}></Route>

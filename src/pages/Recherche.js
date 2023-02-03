@@ -21,8 +21,11 @@ export default function Navbar(){
         <div className='flex justify-evenly  w-1/1'>   
         <table >
             <thead>
+                <tr>
                 <td></td>
                 <td>Titre</td>
+
+                </tr>
             </thead>
             <tbody>
                 
