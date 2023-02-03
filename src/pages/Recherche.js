@@ -37,11 +37,11 @@ export default function Navbar(){
             {/* textboxrecherche */}
             <div className='w-1/4'>
                 <input className='w-full border-2 border-gray-300 rounded-lg p-2' onChange={handleChange} placeholder='Recherche'></input>
-                <p>{inputText != '' ? (<>{inputText}</>) : (<></>)}</p>
             </div>
             <div className='w-1/4'>
                 <select placeholder='Catégorie' className=' border-2 border-gray-300 rounded-lg p-2'>
-                    <option value=''>-- Selectionnez une opion --</option>
+                    <option value='complexSearch'>Search by recipes</option>
+                    <option value=''></option>
                 </select>
             </div>
         </div>
