@@ -37,7 +37,8 @@ export default function Navbar(){
         e.preventDefault();
         clearTimeout(timeout)
         timeout = setTimeout(() => {
-            if(maxCarbs == '' || e.target.value <= maxCarbs){
+
+            if(maxCarbs == '' || e.target.value <= Number(maxCarbs)){
                 setMinCarbs(e.target.value);
             } else {
                 setMinCarbs('1')
@@ -48,12 +49,10 @@ export default function Navbar(){
 
     const handleChangemaxCarbs = (e) => {
         e.preventDefault();
+        
         clearTimeout(timeout)
-        console.log(minCarbs)
         timeout = setTimeout(() => {
-            if(e.target.value >= minCarbs){
-                
-        console.log(minCarbs + '2')
+            if(e.target.value >= Number(minCarbs)){
                 setMaxCarbs(e.target.value);
 
             } else {
@@ -63,18 +62,21 @@ export default function Navbar(){
         }, 700);
     }
 
+    // c9ac5e1b5ca9448fb5cf775c71b4aeb1
+    // 9185b4dc4ec64b1bbd9055313ecf227c
+
     useEffect(() => {
         const fetchData = async () => {
             var response = null
         if(filter === 'complexSearch'){
             console.log(filter)
-            response = await fetch('https://api.spoonacular.com/recipes/' + filter + '?apiKey=9185b4dc4ec64b1bbd9055313ecf227c&query=' + inputText);
+            response = await fetch('https://api.spoonacular.com/recipes/' + filter + '?apiKey=c9ac5e1b5ca9448fb5cf775c71b4aeb1&query=' + inputText);
         }
         else if(filter === 'findByNutrients'){
-            response = await fetch('https://api.spoonacular.com/recipes/' + filter + '?apiKey=9185b4dc4ec64b1bbd9055313ecf227c&minCarbs=' + minCarbs + (maxCarbs != '' ? '&maxCarbs=' + maxCarbs : ''));
+            response = await fetch('https://api.spoonacular.com/recipes/' + filter + '?apiKey=c9ac5e1b5ca9448fb5cf775c71b4aeb1&minCarbs=' + minCarbs + (maxCarbs != '' ? '&maxCarbs=' + maxCarbs : ''));
         }
         else if(filter === 'findByIngredients'){
-            response = await fetch('https://api.spoonacular.com/recipes/' + filter + '?apiKey=9185b4dc4ec64b1bbd9055313ecf227c&ingredients=apples');
+            response = await fetch('https://api.spoonacular.com/recipes/' + filter + '?apiKey=c9ac5e1b5ca9448fb5cf775c71b4aeb1&ingredients=apples');
         }
         const json = await response.json();
         setData(json);
