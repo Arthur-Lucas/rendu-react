@@ -34,7 +34,7 @@ export default function Navbar(){
                 setMinCarbs('1')
             }
            
-        }, 1500);
+        }, 700);
     }
 
     const handleChangemaxCarbs = (e) => {
@@ -51,27 +51,27 @@ export default function Navbar(){
                 setMaxCarbs('')
             }
            
-        }, 1500);
+        }, 700);
     }
 
-    // useEffect(() => {
-    //     const fetchData = async () => {
-    //         var response = null
-    //     if(filter === 'complexSearch'){
-    //         console.log(filter)
-    //         response = await fetch('https://api.spoonacular.com/recipes/' + filter + '?apiKey=9185b4dc4ec64b1bbd9055313ecf227c&query=' + inputText);
-    //     }
-    //     else if(filter === 'findByNutrients'){
-    //         response = await fetch('https://api.spoonacular.com/recipes/' + filter + '?apiKey=9185b4dc4ec64b1bbd9055313ecf227c&minCarbs=' + minCarbs + (maxCarbs != '' ? '&maxCarbs=' + maxCarbs : ''));
-    //     }
-    //     else if(filter === 'findByIngredients'){
-    //         response = await fetch('https://api.spoonacular.com/recipes/' + filter + '?apiKey=9185b4dc4ec64b1bbd9055313ecf227c&ingredients=apples');
-    //     }
-    //     const json = await response.json();
-    //     setData(json);
-    //     }; 
-    //     fetchData(); 
-    // }, [inputText, filter, minCarbs, maxCarbs]);
+    useEffect(() => {
+        const fetchData = async () => {
+            var response = null
+        if(filter === 'complexSearch'){
+            console.log(filter)
+            response = await fetch('https://api.spoonacular.com/recipes/' + filter + '?apiKey=9185b4dc4ec64b1bbd9055313ecf227c&query=' + inputText);
+        }
+        else if(filter === 'findByNutrients'){
+            response = await fetch('https://api.spoonacular.com/recipes/' + filter + '?apiKey=9185b4dc4ec64b1bbd9055313ecf227c&minCarbs=' + minCarbs + (maxCarbs != '' ? '&maxCarbs=' + maxCarbs : ''));
+        }
+        else if(filter === 'findByIngredients'){
+            response = await fetch('https://api.spoonacular.com/recipes/' + filter + '?apiKey=9185b4dc4ec64b1bbd9055313ecf227c&ingredients=apples');
+        }
+        const json = await response.json();
+        setData(json);
+        }; 
+        fetchData(); 
+    }, [inputText, filter, minCarbs, maxCarbs]);
     
     return (
         <div className='flex  flex-col items-center w-1/1'>  
