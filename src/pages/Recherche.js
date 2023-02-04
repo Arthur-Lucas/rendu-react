@@ -76,14 +76,22 @@ export default function Navbar(){
     // c9ac5e1b5ca9448fb5cf775c71b4aeb1
     // 9185b4dc4ec64b1bbd9055313ecf227c
 
+
+    // requete API 
     useEffect(() => {
         const fetchData = async () => {
-            var response = null
+            var response = []
         if(filter === 'complexSearch'){
             response = await fetch('https://api.spoonacular.com/recipes/' + filter + '?apiKey=7924ce9a31634a24b50f584ec8ea8b86&query=' + inputText);
         }
         else if(filter === 'findByNutrients'){
-            response = await fetch('https://api.spoonacular.com/recipes/' + filter + '?apiKey=7924ce9a31634a24b50f584ec8ea8b86&minCarbs=' + minCarbs + (maxCarbs != '' ? '&maxCarbs=' + maxCarbs : ''));
+            if(minCarbs != '' || maxCarbs != ''){
+                response = await fetch('https://api.spoonacular.com/recipes/' + filter + '?apiKey=7924ce9a31634a24b50f584ec8ea8b86' + (minCarbs != '' ? '&minCarbs=' + minCarbs : '') + (maxCarbs != '' ? '&maxCarbs=' + maxCarbs : ''));
+            }
+            else {
+                response = await fetch('https://api.spoonacular.com/recipes/' + filter + '?apiKey=7924ce9a31634a24b50f584ec8ea8b86&minCarbs=1');
+            }
+
         }
         else if(filter === 'findByIngredients'){
             if(ingredients.length > 0){
@@ -92,6 +100,9 @@ export default function Navbar(){
                         '+' + ingredient.name
                     )
                  }));
+            }
+            else {
+                response = await fetch('https://api.spoonacular.com/recipes/' + filter + '?apiKey=7924ce9a31634a24b50f584ec8ea8b86');
             }
             
             getIngredients().then(output => {
@@ -139,8 +150,8 @@ export default function Navbar(){
             </div>
         </div>
             
-            
-            {data ? (
+            {/* Si la recherche n'est pas vide */}
+            {data != null && (data.length > 0 || (data.results && data.results.length > 0))? (
             <table >
                 <thead>
                     <tr>
@@ -150,10 +161,10 @@ export default function Navbar(){
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
+                    {/* <tr>
                         <td><img className='w-24' src='https://images.ctfassets.net/hrltx12pl8hq/3j5RylRv1ZdswxcBaMi0y7/b84fa97296bd2350db6ea194c0dce7db/Music_Icon.jpg' /></td>
                         <td>Repas</td>
-                    </tr>
+                    </tr> */}
                     {data && data.results && data.results.map((repas) =>{
                         return(
                             <tr onClick={(e) =>  handleClick(e,repas.id)}  key={repas.id}>
@@ -166,14 +177,14 @@ export default function Navbar(){
                         return(
                             <tr  key={repas.id}>
                                 <td className='w-24'><img src={repas.image}></img></td>
-                                <td>{repas.title}</td>
+                                <td><p>{repas.title}</p>{repas.unusedIngredients.length > 0 ? ('Unused ingredient : ' + repas.unusedIngredients.map((ingr) => {return (ingr.name + ',')})) : ''}</td>
                             </tr>
                         )
                     })}
                 </tbody>
             </table>
             ) : (<p>
-                Aucun résultat à la recherche
+                Aucun résultat ne correspond à la recherche
             </p>)}
         </div>
     )
