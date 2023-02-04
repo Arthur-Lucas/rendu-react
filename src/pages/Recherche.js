@@ -177,7 +177,7 @@ export default function Navbar(){
                         return(
                             <tr  key={repas.id}>
                                 <td className='w-24'><img src={repas.image}></img></td>
-                                <td><p>{repas.title}</p>{repas.unusedIngredients.length > 0 ? ('Unused ingredient : ' + repas.unusedIngredients.map((ingr) => {return (ingr.name + ',')})) : ''}</td>
+                                <td><p>{repas.title}</p>{repas.unusedIngredients && repas.unusedIngredients.length > 0 ? ('Unused ingredient : ' + repas.unusedIngredients.map((ingr) => {return (ingr.name + ',')})) : ''}</td>
                             </tr>
                         )
                     })}
