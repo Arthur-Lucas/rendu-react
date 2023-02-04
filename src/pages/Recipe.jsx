@@ -19,15 +19,37 @@ export default function Recipe() {
 
   return (
     <div>
-        {data ?( 
-                            <div key={data.id}>
-                                <div className='w-24'><img src={data.image}/></div>
-                                <div>{data.title}</div>
+        {data ? ( 
+                    <div key={data.id}>
+                        <div className='w-24'><img src={data.image}/></div>
+                        <div>{data.title}</div>
+                        <div>{data.readyInMinutes}</div>
+                        <div>{data.servings}</div>
+                        <div>{data.vegetarian == false ? (<div>Vegetarian</div>) : (<div>Not vegetarian</div> )}</div>
+                        <div>{data.glutenFree == false ? ( <div>Gluten Free</div>) : (<div>Not Gluten Free</div> )}</div>
+                        <div>
+                            {data.extendedIngredients.map((ingredient) => (
+                                <div key={ingredient.id}>
+                                    <p>{ingredient.name}</p>
+                                    <div className='w-24'><img src={ingredient.image}/></div>
+                                    <p>
+                                        <span>{ingredient.measures.metric.amount} </span>
+                                        <span>{ingredient.measures.metric.unitShort}</span>
+                                        </p>
+                                </div>
+                            ))}
                             </div>
-                        )
-                    
-                    : <div>Loading...</div>
-                    }
+                            <div>{data.winePairing.pairingText}</div>
+                            <div>{data.winePairing.productMatches[0].title}</div>
+                            <div>{data.winePairing.productMatches[0].price}</div>
+                            <div>{data.winePairing.productMatches[0].description}</div>
+                            <div className='w-24'><img src={data.winePairing.productMatches[0].imageUrl}/></div>
+                            {/* <div>{data.winePairing.productMatches.map((wineInfos) => (
+                                <div key={wineInfos.title}></div>
+                            ))}</div> */}
+                    </div>
+                    ) : <div>Loading...</div> 
+            }
                        
     </div>
   )
