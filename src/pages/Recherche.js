@@ -115,6 +115,8 @@ export default function Navbar(){
         fetchData(); 
     }, [inputText, filter, minCarbs, maxCarbs, ingredients]);
     
+//////
+
     return (
         <div className='flex  flex-col items-center w-1/1'>  
         <div className='flex flex-row w-full items-center justify-center'>
