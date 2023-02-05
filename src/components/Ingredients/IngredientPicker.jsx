@@ -1,21 +1,19 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 export default function IngredientPicker({ setIngredients, ingredients, data }) {
 
     
     
     const [select, setSelect] = useState('')
+    const [queryResults, setQueryResults] = useState([])
+    const [showDatalist, setShowDatalist] = useState(false)
 
-    const addIngredient = (e) => {
-        const foundIngredient = data && data.find(ingredient => ingredient.name === e.target.value)
-        if (foundIngredient) {
-            if (!ingredients.includes(foundIngredient)){
-                setSelect('')
-                setIngredients([...ingredients, foundIngredient])
-            }
-        } else {
-            setSelect(e.target.value)
-        }
+    
+
+    const addIngredient = (result) => {
+        const newIngredient = data.find(ingredient => ingredient.id === result)
+        setIngredients([...ingredients, newIngredient])
+        setSelect('')
     }
 
     const removeIngredient = (e) => {
@@ -23,15 +21,35 @@ export default function IngredientPicker({ setIngredients, ingredients, data }) 
         setIngredients(filteredIngredients)
     }
 
+    useEffect(() => {
+        if (select.length > 0) {
+            const results = data.filter(ingredient => ingredient.name.toLowerCase().includes(select.toLowerCase()))
+            setQueryResults(results)
+        } else {
+            setQueryResults([])
+        }
+    }, [select])
+
   return (
     <div>
-        <input onChange={addIngredient}  className='border border-black' list="ingredients" name='ingredient' value={select} />
-        <datalist id='ingredients'>
-            <option value="Search for an ingredient (ex: apple)"></option>
-            {data && data.map(ingredient => {
-                return <option key={ingredient.id} value={ingredient.name} />
-            })}
-        </datalist>
+        <div className='relative'>
+            <input onChange={(e) => setSelect(e.target.value)} onFocus={() => {setShowDatalist(true)}} className='border border-[#7A835E]' type="text" name='ingredient' value={select} />
+            {showDatalist && queryResults.length != 0 && (
+                <ul className='flex flex-col absolute divide-y border border-black h-28 overflow-y-auto top-full left-0 bg-white'>
+                {showDatalist && queryResults.map(result => {
+                    return (
+                        // <li onClick={ () => {addIngredient(result.id) } } className='hover:bg-slate-300 cursor-pointer' key={result.id}  >
+                        //     {result.name}
+                        // </li>
+                        <a onClick={ () => {addIngredient(result.id) } } className='hover:bg-slate-300 cursor-pointer' key={result.id}  >
+                            {result.name}
+                        </a>
+                    )
+                })}
+            </ul>
+            )}
+        </div>
+        
         <h2>Selected :</h2>
             <ul>
                 {ingredients.map(ingredient => {
