@@ -21,7 +21,7 @@ export default function Home(){
                     <h2 className='LogoSpan text-3xl mb-8'>Today's special</h2>
                     {data && data.recipes && data.recipes.map((repas) =>{
                         return(
-                            <div className='flex flex-col'>
+                            <div className='flex flex-col' key={repas.id}>
                                 <h2 className='text-4xl colorWhite font-bold mb-8'>{repas.title}</h2>
                                 <p className="LogoSpan text-2xl colorWhite pb-8">[Lorem ipsum dolor sit amet. Eum obcaecati dolores eum doloremque 
                                     expedita est minus laboriosam aut architecto aperiam ea ipsa quia 
