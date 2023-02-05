@@ -2,6 +2,7 @@ import React, { useContext, useRef, useState } from "react";
 import { UserContext } from "../Context/userContext.js";
 import {useNavigate} from "react-router-dom"
 import '../index.css';
+import { redirect } from "react-router";
 
 export default function SignUp() {
   
@@ -41,8 +42,7 @@ export default function SignUp() {
       // formRef.current.reset();
       setValidation("")
       toggleModals("close")
-      navigate("/private/private-home")
-
+      navigate("/")
     } catch (err) {
 
       if(err.code === "auth/invalid-email") {

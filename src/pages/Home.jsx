@@ -14,7 +14,6 @@ export default function Home(){
             };
             fetchData();
         }, []);
-        console.log(data)
     return (
         <div className='HomeCustom flex justify-start items-center relative'>
             <div className="borderRadiusTop background-green absolute left-36 w-3/5 h-full">

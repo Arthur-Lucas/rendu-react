@@ -16,6 +16,7 @@ body {
 .HomeCustom{
   margin-top: 5vh!important;
   height: 80vh!important; 
+  z-index: -1;
 }
 .borderRadiusTop{
   border-radius: 24px 24px 0 0;
