@@ -33,7 +33,6 @@ export default function Navbar(){
         clearTimeout(timeout)
         timeout = setTimeout(() => {
             setInputText(e.target.value);
-           
         }, 500);
     }
     const handleClick = (e,id) => {

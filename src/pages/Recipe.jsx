@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import VeganLogo from '../assets/vegan.svg';
 import GlutenFreeLogo from '../assets/gluten-free.png';
 import DairyFreeLogo from '../assets/dairy-free.png';
+import Converter from '../components/Converter';
 
 import { UserContext } from "../Context/userContext.js";
 
@@ -13,6 +14,7 @@ export default function Recipe() {
     const { apiKey } = useContext(UserContext);
     const [data, setData] = useState(null);
     const params = useParams();
+    const [quantity, setQuantity] = useState(1);
 
     useEffect(() => {
         
@@ -27,9 +29,9 @@ export default function Recipe() {
   return (
     <div>
         {data ? ( 
-            <div className='HomeCustom flex justify-start items-center relative' key={data.id}>
-            <div className="borderRadiusTop background-green absolute left-36 w-3/5">
-                <div className='flex flex-col px-36 pr-96 py-36'>   
+            <div className='flex justify-start items-center' key={data.id}>
+            <div className="borderRadiusTop background-green left-36 w-3/5">
+                <div className='flex flex-col py-36'>   
                     <h2 className='LogoSpan text-3xl mb-8'>{data.sourceName}</h2>
                             <div className='flex flex-col'>
                                 <h2 className='text-4xl colorWhite font-bold mb-8'>{data.title}</h2>
@@ -66,6 +68,8 @@ export default function Recipe() {
                                         ):(
                                             <div></div>
                                         )}
+
+                                        <Converter quantity={quantity} setQuantity={setQuantity} />
                                       
                                 </div>
 
@@ -74,54 +78,23 @@ export default function Recipe() {
                             <img src={data.image} alt={data.title} className='absolute w-2/5 right-0 '/>
                             
                             <div className='mt-10 colorWhite LogoSpan'>
-                                {data.extendedIngredients.map((ingredient) => (
+                                {data.extendedIngredients.map((ingredient) => {
+                                  return (
                                 <div key={ingredient.id}>
-                                   <p>{ingredient.name}</p>
+                                    <p>{ingredient.name}</p>
                                     <div className='w-24'><img src={'https://spoonacular.com/cdn/ingredients_100x100/' + ingredient.image}/></div>
                                     <p>
-                                        <span>{ingredient.measures.metric.amount} </span>
+                                        <span>{Math.floor(ingredient.measures.metric.amount * quantity)} </span>
                                         <span>{ingredient.measures.metric.unitShort}</span>
                                         </p>
                                     </div>
-                                ))}
+                                )})}
                             </div>
                 </div>
-
-                
             </div>
-            {/* <img src={Pastas} alt="Pastas" className='absolute w-2/5 right-36 top-20'/> */}
         </div>
-                    // <div key={data.id}>
-                    //     <div className='w-24'><img src={data.image}/></div>
-                    //     <div>{data.title}</div>
-                    //     <div>{data.readyInMinutes}</div>
-                    //     <div>{data.servings}</div>
-                    //     <div>{data.vegetarian == false ? (<div>Vegetarian</div>) : (<div>Not vegetarian</div> )}</div>
-                    //     <div>{data.glutenFree == false ? ( <div>Gluten Free</div>) : (<div>Not Gluten Free</div> )}</div>
-                    //     <div>
-                    //         {data.extendedIngredients.map((ingredient) => (
-                    //             <div key={ingredient.id}>
-                    //                 <p>{ingredient.name}</p>
-                    //                 <div className='w-24'><img src={ingredient.image}/></div>
-                    //                 <p>
-                    //                     <span>{ingredient.measures.metric.amount} </span>
-                    //                     <span>{ingredient.measures.metric.unitShort}</span>
-                    //                     </p>
-                    //             </div>
-                    //         ))}
-                    //         </div>
-                    //         <div>{data.winePairing.pairingText}</div>
-                    //         <div>{data.winePairing.productMatches[0].title}</div>
-                    //         <div>{data.winePairing.productMatches[0].price}</div>
-                    //         <div>{data.winePairing.productMatches[0].description}</div>
-                    //         <div className='w-24'><img src={data.winePairing.productMatches[0].imageUrl}/></div>
-                    //         {/* <div>{data.winePairing.productMatches.map((wineInfos) => (
-                    //             <div key={wineInfos.title}></div>
-                    //         ))}</div> */}
-                    // </div>
                     ) : <div>Loading...</div> 
             }
-                       
     </div>
   )
 }

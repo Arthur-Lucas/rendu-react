@@ -10,14 +10,12 @@ import SignUp from './components/SignUp';
 import SignIn from './components/SignIn';
 import { UserContextProvider } from './Context/userContext';
 import Recipe from './pages/Recipe';
-import Converter from './components/Converter';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <>
     <BrowserRouter>
     <UserContextProvider>
-      
       <SignUp />
       <SignIn />
       <Navbar />
