@@ -1,14 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Pastas from '../assets/pastas.png';
 import VeganLogo from '../assets/vegan.svg';
 import GlutenFreeLogo from '../assets/gluten-free.png';
 import DairyFreeLogo from '../assets/dairy-free.png';
+import { UserContext } from '../Context/userContext';
+
 export default function Home(){
+
+    const {apiKey} = useContext(UserContext)
     const [data, setData] = useState(null);
 
         useEffect(() => {
             const fetchData = async () => {
-            const response = await fetch('https://api.spoonacular.com/recipes/random?number=1&tags=vegetarian&apiKey=539381c9df374031919666304f095371');
+            const response = await fetch('https://api.spoonacular.com/recipes/random?number=1&tags=vegetarian&apiKey=' + apiKey);
             const json = await response.json();
             setData(json);
             };

@@ -1,16 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 
 import getIngredients from '../utils/getIngredients';
 import IngredientPicker from '../components/Ingredients/IngredientPicker';
 
 import { useNavigate } from 'react-router-dom';
+import { UserContext } from '../Context/userContext';
 
 
 export default function Navbar(){
 
     var timeout = 0;
 
-
+    const { apiKey } = useContext(UserContext);
     const [data, setData] = useState([]);
 
     const [listIngredients, setListIngredients] = useState(null);
@@ -75,36 +76,35 @@ export default function Navbar(){
         const fetchData = async () => {
             var response = []
         if(filter === 'complexSearch'){
-            response = await fetch('https://api.spoonacular.com/recipes/' + filter + '?apiKey=9185b4dc4ec64b1bbd9055313ecf227c&query=' + inputText);
+            response = await fetch('https://api.spoonacular.com/recipes/' + filter + '?apiKey=' + apiKey + '&query=' + inputText);
         }
         else if(filter === 'findByNutrients'){
             if(minCarbs != '' || maxCarbs != ''){
 
                 if(minCarbs != '' && maxCarbs != '' && Number(minCarbs) > Number(maxCarbs)){
-                    // response = await fetch('https://api.spoonacular.com/recipes/' + filter + '?apiKey=7924ce9a31634a24b50f584ec8ea8b86&minCarbs=1');
                     response = null
                 }
                 else {
-                    response = await fetch('https://api.spoonacular.com/recipes/' + filter + '?apiKey=7924ce9a31634a24b50f584ec8ea8b86' + (minCarbs != '' ? '&minCarbs=' + minCarbs : '') + (maxCarbs != '' ? '&maxCarbs=' + maxCarbs : ''));
+                    response = await fetch('https://api.spoonacular.com/recipes/' + filter + '?apiKey=' + apiKey + (minCarbs != '' ? '&minCarbs=' + minCarbs : '') + (maxCarbs != '' ? '&maxCarbs=' + maxCarbs : ''));
                 }
                 
 
             }
             else {
-                response = await fetch('https://api.spoonacular.com/recipes/' + filter + '?apiKey=9185b4dc4ec64b1bbd9055313ecf227c&minCarbs=1');
+                response = await fetch('https://api.spoonacular.com/recipes/' + filter + '?apiKey=' + apiKey + '&minCarbs=1');
             }
 
         }
         else if(filter === 'findByIngredients'){
             if(ingredients.length > 0){
-                 response = await fetch('https://api.spoonacular.com/recipes/' + filter + '?apiKey=9185b4dc4ec64b1bbd9055313ecf227c&ingredients=' + ingredients.map((ingredient) => {
+                 response = await fetch('https://api.spoonacular.com/recipes/' + filter + '?apiKey=' + apiKey + '&ingredients=' + ingredients.map((ingredient) => {
                     return (
                         '+' + ingredient.name
                     )
                  }));
             }
             else {
-                response = await fetch('https://api.spoonacular.com/recipes/' + filter + '?apiKey=9185b4dc4ec64b1bbd9055313ecf227c');
+                response = await fetch('https://api.spoonacular.com/recipes/' + filter + '?apiKey=' + apiKey);
             }
             
             getIngredients().then(output => {
