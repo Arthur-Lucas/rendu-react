@@ -47,11 +47,8 @@ export default function Navbar(){
         e.preventDefault();
         clearTimeout(timeout)
         timeout = setTimeout(() => {
-            if(maxCarbs == '' || e.target.value <= Number(maxCarbs)){
                 setMinCarbs(e.target.value);
-            } else {
-                setMinCarbs('1')
-            }
+           
            
         }, 700);
     }
@@ -61,12 +58,8 @@ export default function Navbar(){
         
         clearTimeout(timeout)
         timeout = setTimeout(() => {
-            if(e.target.value >= Number(minCarbs)){
                 setMaxCarbs(e.target.value);
 
-            } else {
-                setMaxCarbs('')
-            }
            
         }, 700);
     }
@@ -86,7 +79,16 @@ export default function Navbar(){
         }
         else if(filter === 'findByNutrients'){
             if(minCarbs != '' || maxCarbs != ''){
-                response = await fetch('https://api.spoonacular.com/recipes/' + filter + '?apiKey=9185b4dc4ec64b1bbd9055313ecf227c' + (minCarbs != '' ? '&minCarbs=' + minCarbs : '') + (maxCarbs != '' ? '&maxCarbs=' + maxCarbs : ''));
+
+                if(minCarbs != '' && maxCarbs != '' && Number(minCarbs) > Number(maxCarbs)){
+                    // response = await fetch('https://api.spoonacular.com/recipes/' + filter + '?apiKey=7924ce9a31634a24b50f584ec8ea8b86&minCarbs=1');
+                    response = null
+                }
+                else {
+                    response = await fetch('https://api.spoonacular.com/recipes/' + filter + '?apiKey=7924ce9a31634a24b50f584ec8ea8b86' + (minCarbs != '' ? '&minCarbs=' + minCarbs : '') + (maxCarbs != '' ? '&maxCarbs=' + maxCarbs : ''));
+                }
+                
+
             }
             else {
                 response = await fetch('https://api.spoonacular.com/recipes/' + filter + '?apiKey=9185b4dc4ec64b1bbd9055313ecf227c&minCarbs=1');
@@ -109,7 +111,13 @@ export default function Navbar(){
                 setListIngredients(output)
             })
         }
-        const json = await response.json();
+        var json = null;
+        if(response){
+            json = await response.json();  
+        } else {
+            json = {};
+        }
+        
         setData(json);
         }; 
         fetchData(); 
