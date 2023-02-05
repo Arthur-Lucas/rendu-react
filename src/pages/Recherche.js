@@ -19,7 +19,6 @@ export default function Navbar(){
         clearTimeout(timeout)
         timeout = setTimeout(() => {
             setInputText(e.target.value);
-           
         }, 500);
         
     }
@@ -59,13 +58,13 @@ export default function Navbar(){
             var response = null
         if(filter === 'complexSearch'){
             console.log(filter)
-            response = await fetch('https://api.spoonacular.com/recipes/' + filter + '?apiKey=9185b4dc4ec64b1bbd9055313ecf227c&query=' + inputText);
+            response = await fetch('https://api.spoonacular.com/recipes/' + filter + '?apiKey=31708597a5a041d896c31ed8b6e53dfa&query=' + inputText);
         }
         else if(filter === 'findByNutrients'){
-            response = await fetch('https://api.spoonacular.com/recipes/' + filter + '?apiKey=9185b4dc4ec64b1bbd9055313ecf227c&minCarbs=' + minCarbs + (maxCarbs != '' ? '&maxCarbs=' + maxCarbs : ''));
+            response = await fetch('https://api.spoonacular.com/recipes/' + filter + '?apiKey=31708597a5a041d896c31ed8b6e53dfa&minCarbs=' + minCarbs + (maxCarbs != '' ? '&maxCarbs=' + maxCarbs : ''));
         }
         else if(filter === 'findByIngredients'){
-            response = await fetch('https://api.spoonacular.com/recipes/' + filter + '?apiKey=9185b4dc4ec64b1bbd9055313ecf227c&ingredients=apples');
+            response = await fetch('https://api.spoonacular.com/recipes/' + filter + '?apiKey=31708597a5a041d896c31ed8b6e53dfa&ingredients=apples');
         }
         const json = await response.json();
         setData(json);
