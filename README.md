@@ -13,9 +13,9 @@ https://www.figma.com/file/fO3RkHsvbEo9AiGC0bbgnp/Green-Cookbook?node-id=1%3A3&t
 
 ### `npm i`
 
-creer un fichier .env.local en se basant sur le fichier .env.exemple.
+Creer un fichier .env.local en se basant sur le fichier .env.exemple.
 
-Générer la clef Api sur [ICI](https://spoonacular.com/food-api/)
+Générer la clef Api [ICI](https://spoonacular.com/food-api/)
 Modifier dans le fichier UserContext.js la clef API dans la const apiKey
 
 ### `npm start`
