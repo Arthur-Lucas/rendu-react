@@ -75,10 +75,11 @@ export default function Navbar(){
         const fetchData = async () => {
             var response = []
         if(filter === 'complexSearch'){
-            response = await fetch('https://api.spoonacular.com/recipes/' + filter + '?apiKey=7924ce9a31634a24b50f584ec8ea8b86&query=' + inputText);
+            response = await fetch('https://api.spoonacular.com/recipes/' + filter + '?apiKey=9185b4dc4ec64b1bbd9055313ecf227c&query=' + inputText);
         }
         else if(filter === 'findByNutrients'){
             if(minCarbs != '' || maxCarbs != ''){
+
                 if(minCarbs != '' && maxCarbs != '' && Number(minCarbs) > Number(maxCarbs)){
                     // response = await fetch('https://api.spoonacular.com/recipes/' + filter + '?apiKey=7924ce9a31634a24b50f584ec8ea8b86&minCarbs=1');
                     response = null
@@ -87,22 +88,23 @@ export default function Navbar(){
                     response = await fetch('https://api.spoonacular.com/recipes/' + filter + '?apiKey=7924ce9a31634a24b50f584ec8ea8b86' + (minCarbs != '' ? '&minCarbs=' + minCarbs : '') + (maxCarbs != '' ? '&maxCarbs=' + maxCarbs : ''));
                 }
                 
+
             }
             else {
-                response = await fetch('https://api.spoonacular.com/recipes/' + filter + '?apiKey=7924ce9a31634a24b50f584ec8ea8b86&minCarbs=1');
+                response = await fetch('https://api.spoonacular.com/recipes/' + filter + '?apiKey=9185b4dc4ec64b1bbd9055313ecf227c&minCarbs=1');
             }
 
         }
         else if(filter === 'findByIngredients'){
             if(ingredients.length > 0){
-                 response = await fetch('https://api.spoonacular.com/recipes/' + filter + '?apiKey=7924ce9a31634a24b50f584ec8ea8b86&ingredients=' + ingredients.map((ingredient) => {
+                 response = await fetch('https://api.spoonacular.com/recipes/' + filter + '?apiKey=9185b4dc4ec64b1bbd9055313ecf227c&ingredients=' + ingredients.map((ingredient) => {
                     return (
                         '+' + ingredient.name
                     )
                  }));
             }
             else {
-                response = await fetch('https://api.spoonacular.com/recipes/' + filter + '?apiKey=7924ce9a31634a24b50f584ec8ea8b86');
+                response = await fetch('https://api.spoonacular.com/recipes/' + filter + '?apiKey=9185b4dc4ec64b1bbd9055313ecf227c');
             }
             
             getIngredients().then(output => {
@@ -121,6 +123,8 @@ export default function Navbar(){
         fetchData(); 
     }, [inputText, filter, minCarbs, maxCarbs, ingredients]);
     
+//////
+
     return (
         <div className='flex  flex-col items-center w-1/1'>  
         <div className='flex flex-row w-full items-center justify-center'>
@@ -181,7 +185,7 @@ export default function Navbar(){
                     })}
                     {data && !data.results && data.map((repas) =>{
                         return(
-                            <tr  key={repas.id}>
+                            <tr onClick={(e) =>  handleClick(e,repas.id)}  key={repas.id}>
                                 <td className='w-24'><img src={repas.image}></img></td>
                                 <td><p>{repas.title}</p>{repas.unusedIngredients && repas.unusedIngredients.length > 0 ? ('Unused ingredient : ' + repas.unusedIngredients.map((ingr) => {return (ingr.name + ',')})) : ''}</td>
                             </tr>
