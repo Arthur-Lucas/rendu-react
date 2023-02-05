@@ -42,27 +42,28 @@ export default function SignIn() {
   return (
     <>
       {modalState.signInModal && (
-        <div>
-          <div
+        <div className="position-fixed top-0 vw-100 vh-100">
+          <div className="w-100 h-100 bg-dark bg-opacity-75"
             onClick={closeModal}
           ></div>
-          <div
+          <div className="position-absolute top-50 start-50 translate-middle"
             style={{ minWidth: "400px" }}
           >
-            <div>
-              <div>
-                <div >
-                  <h5>Sign In</h5>
-                  <button onClick={closeModal}>X</button>
+            <div className="modal-dialog">
+              <div className="modal-content">
+                <div className="modal-header">
+                  <h5 className="modal-title">Sign In</h5>
+                  <button  className="btn-close" onClick={closeModal}></button>
                 </div>
 
-                <div>
+                <div  className="modal-body">
                   <form
                     ref={formRef}
                     onSubmit={handleForm}
+                    className="sign-in-form"
                   >
-                    <div>
-                      <label htmlFor="signInEmail">
+                    <div className="mb-3">
+                      <label className="form-label" htmlFor="signInEmail">
                         Email adress
                       </label>
                       <input
@@ -70,12 +71,13 @@ export default function SignIn() {
                         name="email"
                         required
                         type="email"
+                        className="form-control"
                         id="signInEmail"
                       />
                     </div>
 
                     <div>
-                      <label htmlFor="signInPwd">
+                      <label className="form-label" htmlFor="signInPwd">
                         Password
                       </label>
                       <input
@@ -83,12 +85,13 @@ export default function SignIn() {
                         name="pwd"
                         required
                         type="password"
+                        className="form-control"
                         id="signInPwd"
                       />
-                      <p>{validation}</p>
+                      <p  className="text-danger mt-1">{validation}</p>
                     </div>
 
-                    <button>Submit</button>
+                    <button className="btn btn-primary">Submit</button>
                   </form>
 
                 </div>
