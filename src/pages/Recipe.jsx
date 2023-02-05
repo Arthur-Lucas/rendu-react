@@ -1,14 +1,17 @@
 import React from 'react'
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import VeganLogo from '../assets/vegan.svg';
 import GlutenFreeLogo from '../assets/gluten-free.png';
 import DairyFreeLogo from '../assets/dairy-free.png';
 import Converter from '../components/Converter';
 
+import { UserContext } from "../Context/userContext.js";
 
 export default function Recipe() {
 
+    
+    const { apiKey } = useContext(UserContext);
     const [data, setData] = useState(null);
     const params = useParams();
     const [quantity, setQuantity] = useState(1);
@@ -16,7 +19,7 @@ export default function Recipe() {
     useEffect(() => {
         
         const fetchData = async () => {
-        const response = await fetch('https://api.spoonacular.com/recipes/'+params.id+'/information?apiKey=31708597a5a041d896c31ed8b6e53dfa');
+        const response = await fetch('https://api.spoonacular.com/recipes/'+params.id+'/information?apiKey=' + apiKey);
         const json = await response.json();
         setData(json);
         }; 

@@ -12,7 +12,7 @@ export const UserContext = createContext()
 
 export function UserContextProvider(props) {
 
-  const apiKey = '';
+  const apiKey = '7924ce9a31634a24b50f584ec8ea8b86';
 
   const signUp = (email, pwd) => createUserWithEmailAndPassword(auth, email, pwd)
   const signIn = (email, pwd) => signInWithEmailAndPassword(auth, email, pwd)
@@ -72,7 +72,7 @@ export function UserContextProvider(props) {
   }
 
   return (
-    <UserContext.Provider value={{modalState, toggleModals, signUp, currentUser, signOutUser, signIn}}>
+    <UserContext.Provider value={{modalState, toggleModals, signUp, currentUser, signOutUser, signIn, apiKey}}>
       {!loadingData && props.children}
     </UserContext.Provider>
   )

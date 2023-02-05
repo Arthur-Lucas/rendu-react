@@ -1,14 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Pastas from '../assets/pastas.png';
 import VeganLogo from '../assets/vegan.svg';
 import GlutenFreeLogo from '../assets/gluten-free.png';
 import DairyFreeLogo from '../assets/dairy-free.png';
+import { UserContext } from '../Context/userContext';
+
 export default function Home(){
+
+    const {apiKey} = useContext(UserContext)
     const [data, setData] = useState(null);
 
         useEffect(() => {
             const fetchData = async () => {
-            const response = await fetch('https://api.spoonacular.com/recipes/random?number=1&tags=vegetarian&apiKey=539381c9df374031919666304f095371');
+            const response = await fetch('https://api.spoonacular.com/recipes/random?number=1&tags=vegetarian&apiKey=' + apiKey);
             const json = await response.json();
             setData(json);
             };
@@ -21,7 +25,7 @@ export default function Home(){
                     <h2 className='LogoSpan text-3xl mb-8'>Today's special</h2>
                     {data && data.recipes && data.recipes.map((repas) =>{
                         return(
-                            <div className='flex flex-col'>
+                            <div className='flex flex-col' key={repas.id}>
                                 <h2 className='text-4xl colorWhite font-bold mb-8'>{repas.title}</h2>
                                 <p className="LogoSpan text-2xl colorWhite pb-8">[Lorem ipsum dolor sit amet. Eum obcaecati dolores eum doloremque 
                                     expedita est minus laboriosam aut architecto aperiam ea ipsa quia 
