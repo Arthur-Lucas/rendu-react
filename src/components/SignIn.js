@@ -2,6 +2,7 @@ import React, { useContext, useRef, useState } from "react";
 import { UserContext } from "../Context/userContext.js";
 import { useNavigate } from "react-router-dom";
 import '../index.css'
+import { redirect } from "react-router";
 
 export default function SignIn() {
   const { modalState, toggleModals, signIn } = useContext(UserContext);
@@ -25,10 +26,10 @@ export default function SignIn() {
         inputs.current[0].value,
         inputs.current[1].value
       );
-      
       setValidation("");
       toggleModals("close");
-      navigate("/private/private-home");
+      navigate("/");
+      
     } catch {
       setValidation("Email and/or password are incorrect")
     }

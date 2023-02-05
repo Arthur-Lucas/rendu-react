@@ -3,17 +3,45 @@
 @tailwind utilities;
 
 body {
+  background-color: #FAEBD2;
+  font-family: 'poppins';
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
 }
-
+.Nav{
+  height: 15vh!important;
+}
+.HomeCustom{
+  margin-top: 5vh!important;
+  height: 80vh!important; 
+  z-index: -1;
+}
+.borderRadiusTop{
+  border-radius: 24px 24px 0 0;
+}
+.borderRadius{
+  border-radius: 24px;
+}
+.borderWhite{
+  border: 2px solid #FAEBD2;
+}
+.background-green{
+  background-color: #7A835E;
+}
+.background-green-clear{
+  background-color: #B9C594;
+}
+.ba
+.Logo{
+  color: #7A835E;
+}
+.LogoSpan{
+  font-family: gloria-hallelujah, sans-serif !important;
+}
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
 .gap-custom{
