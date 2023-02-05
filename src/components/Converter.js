@@ -6,10 +6,10 @@ export default function Converter() {
     console.log(quantity)
 
     return (
-        <div className="flex justify-center">
-            <button className="border-2" onClick={() => setQuantity(quantity ++ )}>+</button>
-            <div className="border-2">{quantity}</div>
-            <button className="border-2" onClick={() => setQuantity(Math.max(quantity --, 1))}>-</button>
+        <div className="flex gap-2">
+            <button className="flex justify-center border-2 rounded-full h-8 w-8" onClick={() => setQuantity(quantity ++ )}>-</button>
+            <div className="flex justify-center border-2 h-8 w-12 rounded-full">{quantity}</div>
+            <button className="flex justify-center border-2 rounded-full h-8 w-8" onClick={() => setQuantity(Math.max(quantity --, 1))}>+</button>
         </div>
     )
 }
