@@ -1,21 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import Pastas from '../assets/pastas.png';
-import VeganLogo from '../assets/vegan.svg';
-import GlutenFreeLogo from '../assets/gluten-free.png';
-import DairyFreeLogo from '../assets/dairy-free.png';
-export default function Home(){
-    const [data, setData] = useState(null);
-
-        useEffect(() => {
-            const fetchData = async () => {
-            const response = await fetch('https://api.spoonacular.com/recipes/random?number=1&tags=vegetarian&apiKey=539381c9df374031919666304f095371');
-            const json = await response.json();
-            setData(json);
-            };
-            fetchData();
-        }, []);
-    return (
-        <div className='HomeCustom flex justify-start items-center relative'>
+<div className='HomeCustom flex justify-start items-center relative'>
             <div className="borderRadiusTop background-green absolute left-36 w-3/5 h-full">
                 <div className='flex flex-col px-36 pr-96 py-36'>   
                     <h2 className='LogoSpan text-3xl mb-8'>Today's special</h2>
@@ -61,7 +44,3 @@ export default function Home(){
             </div>
             <img src={Pastas} alt="Pastas" className='absolute w-2/5 right-36 top-20'/>
         </div>
-       
-        
-    )
-}

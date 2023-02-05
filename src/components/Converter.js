@@ -3,7 +3,6 @@ import React, {useState} from "react";
 export default function Converter() {
 
     let [quantity, setQuantity] = useState(1);
-    console.log(quantity)
 
     return (
         <div className="flex gap-2">
