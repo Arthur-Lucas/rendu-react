@@ -1,3 +1,17 @@
+Notre projet GreenCookBook a été réalisé par les étudiants suivants :
+
+- Arthur Lucas
+- Basile Maille
+- Pierre Caillet
+- Matis Dené
+- Zoé Michel
+
+Voici le lien de notre figma représentant les fonctionnalités de notre projets, le userflow, le wireframe, ainsi que les maquettes.
+
+
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
