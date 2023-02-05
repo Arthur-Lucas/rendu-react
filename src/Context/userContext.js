@@ -12,6 +12,7 @@ export const UserContext = createContext()
 
 export function UserContextProvider(props) {
 
+  const apiKey = '';
 
   const signUp = (email, pwd) => createUserWithEmailAndPassword(auth, email, pwd)
   const signIn = (email, pwd) => signInWithEmailAndPassword(auth, email, pwd)
