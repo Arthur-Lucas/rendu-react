@@ -17,7 +17,7 @@ export default function Leftovers() {
     const [ingredients, setIngredients] = useState([])
     
   return (
-    <div className='container px-4 bg-[#FAEBD2]'>
+    <div className='container px-4'>
         <h1>Leftovers</h1>
         <IngredientPicker setIngredients={setIngredients} ingredients={ingredients} data={data} />
         
