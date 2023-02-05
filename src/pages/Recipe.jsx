@@ -25,7 +25,7 @@ export default function Recipe() {
     <div>
         {data ? ( 
             <div className='HomeCustom flex justify-start items-center relative' key={data.id}>
-            <div className="borderRadiusTop background-green absolute left-36 w-3/5 h-full">
+            <div className="borderRadiusTop background-green absolute left-36 w-3/5">
                 <div className='flex flex-col px-36 pr-96 py-36'>   
                     <h2 className='LogoSpan text-3xl mb-8'>{data.sourceName}</h2>
                             <div className='flex flex-col'>
@@ -74,7 +74,7 @@ export default function Recipe() {
                                 {data.extendedIngredients.map((ingredient) => (
                                 <div key={ingredient.id}>
                                    <p>{ingredient.name}</p>
-                                    <div className='w-24'><img src={ingredient.image}/></div>
+                                    <div className='w-24'><img src={'https://spoonacular.com/cdn/ingredients_100x100/' + ingredient.image}/></div>
                                     <p>
                                         <span>{ingredient.measures.metric.amount} </span>
                                         <span>{ingredient.measures.metric.unitShort}</span>
