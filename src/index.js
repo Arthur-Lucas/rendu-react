@@ -21,7 +21,6 @@ root.render(
       <SignUp />
       <SignIn />
       <Navbar />
-      <Converter />
       <Routes>
         <Route name="search" path='/search' element={<Recherche/>}></Route>
         <Route name="signup" path='/signup' element={<SignUp/>}></Route>

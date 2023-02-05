@@ -14,6 +14,7 @@ export default function IngredientPicker({ setIngredients, ingredients, data }) 
         const newIngredient = data.find(ingredient => ingredient.id === result)
         setIngredients([...ingredients, {id: newIngredient.id, name: newIngredient.name, quantity: 1}])
         setSelect('')
+        document.querySelector('input').focus()
     }
 
     const removeIngredient = (e) => {
