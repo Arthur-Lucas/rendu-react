@@ -92,23 +92,25 @@ export default function Navbar(){
             else {
                 response = await fetch('https://api.spoonacular.com/recipes/' + filter + '?apiKey=' + apiKey + '&minCarbs=1');
             }
+            
 
         }
         else if(filter === 'findByIngredients'){
-            if(ingredients.length > 0){
-                 response = await fetch('https://api.spoonacular.com/recipes/' + filter + '?apiKey=' + apiKey + '&ingredients=' + ingredients.map((ingredient) => {
-                    return (
-                        '+' + ingredient.name
-                    )
-                 }));
-            }
-            else {
-                response = await fetch('https://api.spoonacular.com/recipes/' + filter + '?apiKey=' + apiKey);
-            }
-            
-            getIngredients().then(output => {
-                setListIngredients(output)
-            })
+
+            // if(ingredients.length > 0){
+            //      response = await fetch('https://api.spoonacular.com/recipes/' + filter + '?apiKey=9185b4dc4ec64b1bbd9055313ecf227c&ingredients=' + ingredients.map((ingredient) => {
+            //         return (
+            //             '+' + ingredient.name
+            //         )
+            //      }));
+            // }
+            // else {
+            //     response = await fetch('https://api.spoonacular.com/recipes/' + filter + '?apiKey=9185b4dc4ec64b1bbd9055313ecf227c');
+            // }
+            // getIngredients().then(output => {
+            //     setListIngredients(output)
+            // })
+            navigate("/leftovers")
         }
         var json = null;
         if(response){
