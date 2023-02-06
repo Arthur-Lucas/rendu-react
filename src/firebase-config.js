@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { getAuth } from "firebase/auth";
 import { getDatabase } from "firebase/database";
 
 const firebaseConfig = {
@@ -14,14 +14,3 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 export const db = getDatabase(app);
-onAuthStateChanged(auth, user => {
-    // Check for user status
-  });
-
-
-
-  // firebase.auth().signOut().then(function() {
-  //   // Sign-out successful.
-  // }).catch(function(error) {
-  //   // An error happened.
-  // });

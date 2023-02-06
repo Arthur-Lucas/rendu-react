@@ -2,6 +2,7 @@ import React, { useContext, useRef, useState } from "react";
 import { UserContext } from "../Context/userContext.js";
 import {useNavigate} from "react-router-dom"
 import '../index.css';
+import { redirect } from "react-router";
 
 export default function SignUp() {
   
@@ -41,8 +42,7 @@ export default function SignUp() {
       // formRef.current.reset();
       setValidation("")
       toggleModals("close")
-      navigate("/private/private-home")
-
+      navigate("/")
     } catch (err) {
 
       if(err.code === "auth/invalid-email") {
@@ -65,28 +65,31 @@ export default function SignUp() {
   return (
     <>
       {modalState.signUpModal && (
-        <div>
+        <div className="position-fixed top-0 vw-100 vh-100">
           <div
+          className="w-100 h-100 bg-dark bg-opacity-75"
           onClick={closeModal}>
           </div>
             <div
+              className="position-absolute top-50 start-50 translate-middle"
               style={{ minWidth: "400px" }}
             >
-              <div >
-                <div >
-                  <div >
-                    <h5>Sign Up</h5>
-                    <button 
+              <div className="modal-dialog">
+                <div className="modal-content">
+                  <div className="modal-header">
+                    <h5 className="modal-title">Sign Up</h5>
+                    <button className="btn-close"
                     onClick={closeModal}
-                    >X</button>
+                    ></button>
                   </div>
 
-                  <div >
+                  <div className="modal-body">
                     <form 
+                    className="sign-up-form"
                     ref={formRef}
                     onSubmit={handleForm}>
-                      <div>
-                        <label htmlFor="signUpEmail">
+                      <div className="mb-3">
+                        <label htmlFor="signUpEmail" className="form-label">
                           Email adress
                         </label>
                         <input
@@ -94,12 +97,13 @@ export default function SignUp() {
                           name="email"
                           required
                           type="email"
+                          className="form-control"
                           id="signUpEmail"
                         />
                       </div>
 
-                      <div>
-                        <label htmlFor="signUpPwd" >
+                      <div className="mb-3">
+                        <label htmlFor="signUpPwd" className="form-label">
                           Password
                         </label>
                         <input
@@ -107,12 +111,13 @@ export default function SignUp() {
                           name="pwd"
                           required
                           type="password"
+                          className="form-control"
                           id="signUpPwd"
                         />
                       </div>
 
                       <div className="mb-3">
-                        <label htmlFor="repeatPwd">
+                        <label htmlFor="repeatPwd" className="form-label">
                           Repeat Password
                         </label>
                         <input
@@ -120,12 +125,13 @@ export default function SignUp() {
                           name="pwd"
                           required
                           type="password"
+                          className="form-control"
                           id="repeatPwd"
                         />
-                        <p>{validation}</p>
+                        <p className="text-danger mt-1">{validation}</p>
                       </div>
 
-                      <button>Submit</button>
+                      <button className="btn btn-primary">Submit</button>
                     </form>
                   </div>
                 </div>
